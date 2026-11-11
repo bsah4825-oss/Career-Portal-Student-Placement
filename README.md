@@ -115,7 +115,6 @@ python -m pip install -r requirements.txt
 Create a file named `.env` in the project root. Add your own values:
 
 ```env
-SECRET_KEY=replace_with_a_long_random_secret
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-3.8-flash
 ```
