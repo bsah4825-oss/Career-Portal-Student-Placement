@@ -1,153 +1,104 @@
-<div align="center">
-  <img src="static/careerverse/careerverse-logo.svg" alt="CAREERVERSE" width="360">
-  <h1>CAREERVERSE</h1>
-  <p><strong>Learn with purpose. Build real skills. Shape your career.</strong></p>
-  <p>A student-focused career and learning platform built with Flask.</p>
-  <p>
-    <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.11+">
-    <img src="https://img.shields.io/badge/Flask-3.1-black?logo=flask&logoColor=white" alt="Flask 3.1">
-    <img src="https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white" alt="SQLite">
-    <img src="https://img.shields.io/badge/AI-Gemini%20optional-8E75B2?logo=googlegemini&logoColor=white" alt="Optional Gemini integration">
-  </p>
-</div>
+🚀 Career Portal – Student Placement
+Career Portal – Student Placement is a web-based student career development and placement preparation platform. It helps students organize their profiles, build skills, practice problem-solving, track internships, showcase projects, and prepare for recruitment through learning resources and AI-powered guidance.
 
----
+The goal is to bring important career preparation activities together in one place and help students move from academic learning towards becoming career-ready.
+✨ Features
+👤 Student Account & Profile
+- Student registration, login, and logout.
+- Personal profile and account settings.
+- Individual student records and progress.
+🎯 Career Development
+- Add, update, and manage technical skills.
+- Track Data Structures and Algorithms (DSA) practice.
+- Store certificates and achievements.
+- Track internship applications and their status.
+- Build a portfolio from student skills, projects, certificates, and evidence.
+📚 Learning & Career Preparation
+- Personalized learning profile and career roadmap.
+- Learning Academy with structured learning tracks and lessons.
+- Practice activities and progress analytics.
+- Project Studio to record projects, repository links, contributions, and milestones.
+- Opportunity Hub to save internships, scholarships, hackathons, competitions, and events.
+- Mentor request workflow.
+🤖 AI Learning Companion
+- Supports learning, concept explanations, error explanations, practice, and project guidance.
+- Can use the Google Gemini API when an API key is configured.
+- Provides an offline fallback when Gemini is not configured or unavailable.
+🧪 Recruitment Intelligence Lab
+- Interactive recruitment preparation and simulation.
+- Practice activities covering aptitude, programming, technical, case-study, and HR-style rounds.
+- Review session results after submission.
+🛠️ Technology Stack
+Layer	Technology
+Frontend	HTML5, CSS3, JavaScript
+Backend	Python, Flask
+Database	SQLite
+Templates	Jinja2
+AI integration	Google Gemini API (optional)
+Version control	Git and GitHub
 
-## 🧭 Contents
 
-- [✨ What is CAREERVERSE?](#-what-is-careerverse)
-- [🚀 What you can do](#-what-you-can-do)
-- [🛠️ Built with](#️-built-with)
-- [⚡ Get started](#-get-started)
-- [🗺️ Explore the app](#️-explore-the-app)
-- [📁 Project structure](#-project-structure)
-- [🔐 Data, AI and limitations](#-data-ai-and-limitations)
-- [📚 More documentation](#-more-documentation)
-
-## ✨ What is CAREERVERSE?
-
-CAREERVERSE brings career planning and skill-building into one place. Students can explore learning paths, practice new skills, build projects, track evidence of their work, and prepare for career opportunities.
-
-The app combines a student career portal with the CAREERVERSE learning platform and the **Recruitment Intelligence Lab**, an educational interview-practice simulation.
-
-## 🚀 What you can do
-
-| Area | Highlights |
-|---|---|
-| 👤 **Your account** | Register, sign in, manage your profile and update your password. |
-| 📌 **Career tracker** | Keep track of skills, DSA practice, certificates and internship applications. |
-| 🧭 **Personal learning path** | Complete onboarding and a baseline diagnostic, then explore a career roadmap. |
-| 🎓 **Learning academy** | Follow guided lessons and use curated learning resources across multiple fields. |
-| 🧪 **Practice and projects** | Try quizzes, plan projects, track milestones and record skill evidence. |
-| 📈 **Progress and portfolio** | Review learning activity and bring projects, skills and evidence together. |
-| 🌱 **Career support** | Explore career roles, save opportunities and submit mentor requests. |
-| 🤖 **AI learning companion** | Optionally use Gemini-powered tutoring and personalization, with offline fallbacks. |
-| 💼 **Recruitment practice** | Try a multi-round AI/ML recruitment simulation and review your results. |
-
-## 🛠️ Built with
-
-- **Backend:** Python, Flask and Werkzeug
-- **Database:** SQLite
-- **Frontend:** Jinja, HTML, CSS and JavaScript
-- **AI integration:** Google Gemini API (optional)
-
-## ⚡ Get started
-
-### Prerequisites
-
-- Python **3.11 or later**
-- PowerShell on Windows (or an equivalent terminal)
-
-### 1. Create a virtual environment
-
-From the project directory, run:
-
-```powershell
+📁 Project Structure
+CAREER-PORTAL-STUDENT-PLACEMENT/
+├── app.py                       # Main Flask application
+├── careerverse_features.py      # Career development and learning features
+├── lesson_resources.py          # Learning lesson resources
+├── personalize.py               # Personalized roadmap support
+├── topic_resources.py           # Topic-based learning resources
+├── requirements.txt             # Python dependencies
+├── templates/                   # HTML/Jinja2 pages
+├── static/                      # CSS, JavaScript, and images
+├── image/                       # Project screenshots and images
+└── README.md                    # Project documentation
+🚀 Getting Started
+1️⃣ Requirements
+- Python 3.10 or later recommended
+- pip
+- Visual Studio Code or another Python IDE
+2️⃣ Download the Project
+Clone the repository:
+git clone <YOUR-GITHUB-REPOSITORY-URL>
+cd <PROJECT-FOLDER>
+Alternatively, download the repository as a ZIP file and extract it.
+3️⃣ Create and Activate a Virtual Environment
+Windows PowerShell:
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-If PowerShell blocks activation, use the virtual environment's Python directly:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe app.py
-```
-
-### 2. Install dependencies
-
-```powershell
+If PowerShell blocks activation, use Command Prompt:
+.venv\Scripts\activate.bat
+macOS / Linux:
+python3 -m venv .venv
+source .venv/bin/activate
+4️⃣ Install Dependencies
 python -m pip install -r requirements.txt
-```
-
-### 3. Add local configuration
-
-Create a `.env` file in the project root:
-
-```dotenv
-SECRET_KEY=replace-with-a-long-random-secret
-GEMINI_API_KEY=
+5️⃣ Configure Environment Variables
+Create a file named .env in the project root. Add your own values:
+SECRET_KEY=replace_with_a_long_random_secret
+GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-3.8-flash
-FLASK_DEBUG=1
-COOKIE_SECURE=0
-```
-
-`GEMINI_API_KEY` is optional. Leave it empty to use the available curated and offline fallback experience. To enable Gemini features, add your own API key. **Never share or commit your key or `.env` file.**
-
-`FLASK_DEBUG=1` and `COOKIE_SECURE=0` are local-development settings only. For a public deployment, configure a strong secret key, HTTPS, secure cookies and other production protections.
-
-### 4. Run CAREERVERSE
-
-```powershell
+GEMINI_API_KEY is optional. Without it, AI-powered responses use the application's offline fallback where available. Keep your .env file private and never commit API keys or secret values to GitHub.
+6️⃣ Run the Application
 python app.py
-```
-
-Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser and create an account. The application initializes its SQLite database and required tables at startup.
-
-## 🗺️ Explore the app
-
-| Destination | Route |
-|---|---|
-| 🏠 Home | `/` |
-| 📝 Register / sign in | `/register` · `/login` |
-| 🌟 CAREERVERSE home | `/careerverse/` |
-| 🎓 Learning academy | `/careerverse/academy` |
-| 🧭 Career roadmap | `/careerverse/roadmap` |
-| 📚 Learning resources | `/careerverse/resources` |
-| 🧱 Project studio | `/careerverse/projects` |
-| 🧪 Practice arena | `/careerverse/practice` |
-| 📊 Progress analytics | `/careerverse/analytics` |
-| 🤖 AI tutor | `/careerverse/tutor` |
-| 🪪 Portfolio | `/careerverse/portfolio` |
-| 💼 Recruitment Intelligence Lab | `/recruitment-lab` |
-
-Most learning and student-profile pages require you to sign in.
-
-## 📁 Project structure
-
-```text
-CAREERVERSE/
-├── app.py                   # Flask app, account portal and recruitment lab
-├── careerverse_features.py  # CAREERVERSE routes and feature logic
-├── personalize.py           # Optional Gemini integration and personalization
-├── lesson_resources.py      # Learning-track resources
-├── topic_resources.py       # Curated topic resources
-├── templates/               # Jinja page templates
-├── static/                  # CSS, JavaScript, images and logos
-├── requirements.txt         # Python dependencies
-└── database.db              # Local data; excluded from Git
-```
-
-## 🔐 Data, AI and limitations
-
-- **Your local data:** Account and learning activity are stored in SQLite. The local database is excluded from Git to help prevent publishing personal records.
-- **Optional AI:** Gemini-generated roadmaps and tutoring responses may be inaccurate. Review important information, and do not enter secrets or sensitive personal information into prompts.
-- **Learning guidance:** Diagnostic results and career suggestions are starting points, not validated measures of ability, job readiness or employment outcomes.
-- **Recruitment simulation:** The Recruitment Intelligence Lab is an educational MVP, not an employer-certified assessment. Written-answer and code scoring are preliminary; submitted code is not executed by the server.
-- **Before going live:** Review authentication and privacy, enable CSRF protection and rate limiting, configure secure sessions and HTTPS, and plan database backups and migrations.
-
-## 📚 More documentation
-
-- [CAREERVERSE feature guide](README_CAREERVERSE.md)
-- [Recruitment Intelligence Lab guide](RECRUITMENT_LAB_README.md)
-- [Changelog](CHANGELOG_V1.2.md)
+Open the following address in your browser:
+http://127.0.0.1:5000
+Register a student account or log in to start using the portal.
+🗄️ Database
+The application uses SQLite. On a fresh setup, the application initializes its database as configured by the project. Do not upload a database containing real student accounts or personal information to a public repository. Each developer should use their own local database and keep database files out of Git.
+🔐 Security Notes
+- Never publish .env, API keys, passwords, or private student data.
+- Use a strong, unique SECRET_KEY for local or deployed environments.
+- The included configuration is intended for development. Review authentication, session security, CSRF protection, input validation, HTTPS, backups, and privacy controls before deploying publicly.
+- AI-generated guidance can contain mistakes; verify important information independently.
+🔮 Future Scope
+- Employer and institution dashboards.
+- Verified internship and job listings.
+- Expanded learning tracks and assessments.
+- More advanced placement analytics.
+- Additional interview practice and mock recruitment workflows.
+- Production deployment with stronger security and scalability.
+💡 Project Purpose
+Career Portal – Student Placement aims to provide students with a centralized platform to manage career-related activities, strengthen technical skills, document achievements, and prepare more effectively for internship and placement opportunities.
+📌 Project: Career Portal – Student Placement
+🏷️ Category: Student Career Development and Placement Preparation
+⚙️ Backend: Python Flask
+🗃️ Database: SQLite
