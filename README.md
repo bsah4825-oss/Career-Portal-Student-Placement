@@ -1,4 +1,4 @@
-# 🚀 Career Portal – Student Placement
+# 🚀 CareerPortal – Student Placement
 
 **Career Portal – Student Placement** is a web-based student career development and placement preparation platform. It helps students organize their profiles, build skills, practice problem-solving, track internships, showcase projects, and prepare for recruitment through learning resources and AI-powered guidance.
 
