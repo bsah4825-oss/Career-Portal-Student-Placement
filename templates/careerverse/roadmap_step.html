@@ -1,0 +1,21 @@
+{% extends 'careerverse/base.html' %}
+{% block title %}Step {{ i+1 }}: {{ week.focus }} | CAREERVERSE{% endblock %}
+{% macro vcard(v) %}<a class="vid-card" href="{{ v.url }}" target="_blank" rel="noopener noreferrer"><span class="vid-badges">{% if v.top %}<span class="tag best-pick">★ Best for you</span>{% endif %}<span class="tag">{{ v.kind if v.direct else 'YouTube search' }}</span><span class="tag mode-{{ v.mode|lower|replace('-','') }}">{{ v.mode }}</span>{% if v.lang!='English' %}<span class="tag">{{ v.lang }}</span>{% endif %}{% if v.length %}<span class="tag">{{ v.length }}</span>{% endif %}</span><b>{{ v.title }}</b><small>{{ v.channel }}</small><p>{{ v.why }}</p><p class="why-you">🎯 {{ v.reason }}</p><span class="vid-go">{{ 'Watch on YouTube ↗' if v.direct else 'Find on YouTube ↗' }}</span></a>{% endmacro %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">{{ title }} · STEP {{ i+1 }} OF {{ n }} · {{ week.period }}</div><h1>{{ week.focus }}</h1><p>{{ week.learn_and_practise }}</p></div>
+<nav class="stepper" aria-label="Roadmap steps">{% for w in weeks %}<a class="step-dot {{ 'on' if loop.index0==i }} {{ 'done' if loop.index0 in done }}" href="{{ url_for('careerverse.roadmap_step',i=loop.index0) }}" title="{{ w.focus }}">{{ '✓' if loop.index0 in done else loop.index }}</a>{% endfor %}</nav>
+<div class="two-col"><div>
+{% for b in blocks %}
+<section class="study-box"><h2>{{ loop.index }}. {{ b.topic.name }}</h2><p class="profile-line">{{ b.pres.profile_line }}</p>
+<div class="plan-box"><b>How to study this</b><ol>{% for st in b.pres.plan %}<li>{{ st }}</li>{% endfor %}</ol><p>{{ b.pres.time_note }}</p></div>
+<h3>▶ Videos &amp; playlists</h3><div class="vid-grid">{% for v in b.pres.videos %}{{ vcard(v) }}{% endfor %}</div>
+{% if b.pres.extra %}<p class="extra-lang"><a href="{{ b.pres.extra.url }}" target="_blank" rel="noopener noreferrer">🔎 {{ b.pres.extra.label }} ↗</a></p>{% endif %}
+<h3>📄 Prefer reading? Articles</h3><ul class="art-list">{% for a in b.pres.articles %}<li><a href="{{ a.url }}" target="_blank" rel="noopener noreferrer"><b>{{ a.title }}</b></a> <small>· {{ a.source }}</small><br><span>{{ a.why }}</span><br><span class="why-you">🎯 {{ a.reason }}</span></li>{% endfor %}</ul>
+{% if b.academy %}<h3>🧪 Practise inside CAREERVERSE</h3><ul class="art-list">{% for l in b.academy %}<li><a href="{{ url_for('careerverse.lesson',track_id=l.track_id,lesson_slug=l.slug) }}"><b>{{ l.title }}</b></a> {{ '✓ completed' if l.done else '' }}</li>{% endfor %}</ul>{% endif %}
+<div class="mastery-box"><h3>✅ You have mastered this when you can…</h3><ul>{% for m in b.topic.mastery %}<li>{{ m }}</li>{% endfor %}</ul><p><b>Do this right after watching:</b> {{ b.topic.handson }}</p></div></section>
+{% endfor %}
+<form method="post" class="form-card reflection"><h2>Show your proof</h2><div class="task-box"><b>Proof to create for this step</b><p>{{ week.proof_of_skill }}</p></div><label>What did you build, learn or find difficult? Paste a link (GitHub, notebook, document) or explain in your own words<textarea name="proof" rows="5" minlength="15" required placeholder="Be specific: what you made, what went wrong, how you fixed it.">{{ my_proof }}</textarea></label><button class="btn primary">{{ 'Update proof' if i in done else 'Mark step complete' }}{{ ' & continue →' if i+1<n else '' }}</button></form>
+<div class="step-nav">{% if i>0 %}<a class="btn" href="{{ url_for('careerverse.roadmap_step',i=i-1) }}">← Previous step</a>{% endif %}<a class="btn" href="{{ url_for('careerverse.roadmap') }}">Back to roadmap</a>{% if i+1<n %}<a class="btn" href="{{ url_for('careerverse.roadmap_step',i=i+1) }}">Next step →</a>{% endif %}</div>
+</div>
+<aside class="side-note"><h3>Step {{ i+1 }} of {{ n }}</h3><p>{{ done|length }} of {{ n }} steps completed.</p><div class="bar"><span style="width:{{ (done|length*100/n)|round|int }}%"></span></div><h3>Mastery over rushing</h3><p>Completing a step records your own proof. It is not a certificate. Watch one video, practise straight away, then write your proof.</p></aside></div>
+{% endblock %}

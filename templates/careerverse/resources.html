@@ -1,0 +1,7 @@
+{% extends 'careerverse/base.html' %}
+{% block title %}Learning Resources | CAREERVERSE{% endblock %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">CURATED RESOURCE LIBRARY</div><h1>Learn from people and organisations that know the field.</h1><p>These resources are selected for structured learning, practical exercises and trustworthy references. Most are free; check each provider's terms because optional certificates, exams or advanced features may cost money.</p></div>
+<div class="resource-grid">{% for resource in resources %}<article class="resource-card"><div class="resource-top"><span class="tag">{{ resource.kind }}</span><span class="resource-level">{{ resource.level }}</span></div><h3>{{ resource.title }}</h3><p>{{ resource.why }}</p><a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open resource ↗</a></article>{% endfor %}</div>
+<div class="notice"><b>Learning rule:</b> Watch or read one lesson, practise the idea, then create a small project or written explanation. Do not collect playlists without applying what you learn.</div>
+{% endblock %}

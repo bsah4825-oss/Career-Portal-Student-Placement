@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | CareerPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="portal-layout">
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                <img
+                    src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}"
+                    alt="CareerPortal"
+                >
+            </div>
+
+            <div>
+
+                <h1>CareerPortal</h1>
+
+                <p>Student Placement</p>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('careerverse.hub') }}" class="nav-item">
+                <span class="nav-icon">✦</span>
+                <span>CAREERVERSE</span>
+            </a>
+
+            <a href="{{ url_for('home') }}" class="nav-item active">
+
+                <span class="nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="{{ url_for('profile') }}" class="nav-item">
+
+                <span class="nav-icon">◉</span>
+
+                <span>Profile</span>
+
+            </a>
+
+
+            <a href="{{ url_for('skills_page') }}" class="nav-item">
+
+                <span class="nav-icon">◆</span>
+
+                <span>Skills</span>
+
+            </a>
+
+
+            <a href="{{ url_for('dsa_page') }}" class="nav-item">
+
+                <span class="nav-icon">▣</span>
+
+                <span>DSA Tracker</span>
+
+            </a>
+
+
+            <a href="{{ url_for('certificates_page') }}" class="nav-item">
+
+                <span class="nav-icon">◇</span>
+
+                <span>Certificates</span>
+
+            </a>
+
+
+            <a href="{{ url_for('internships_page') }}" class="nav-item">
+
+                <span class="nav-icon">▰</span>
+
+                <span>Internships</span>
+
+            </a>
+
+            <a href="{{ url_for('recruitment_lab') }}" class="nav-item">
+                <span class="nav-icon">✦</span>
+                <span>Recruitment Lab</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="{{ url_for('settings') }}" class="nav-item">
+
+                <span class="nav-icon">⚙</span>
+
+                <span>Settings</span>
+
+            </a>
+
+
+            <a href="{{ url_for('logout') }}" class="nav-item logout">
+
+                <span class="nav-icon">⇥</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================================================= -->
+        <!-- TOPBAR -->
+        <!-- ================================================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="topbar-small">
+                    Student Placement Portal
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="user-mini">
+
+                <div class="user-avatar">
+
+                    {{ user["name"][0]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <span>
+                        {{ user["registration_no"] }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- WELCOME SECTION -->
+        <!-- ================================================= -->
+
+        <section class="dashboard-welcome">
+
+            <div>
+
+                <span>
+                    WELCOME BACK 👋
+                </span>
+
+
+                <h2>
+                    Hello, {{ user["name"] }}
+                </h2>
+
+
+                <p>
+                    Keep building your skills, solving DSA problems,
+                    earning certificates and gaining internship experience.
+                </p>
+
+            </div>
+
+
+            <div class="welcome-readiness">
+
+                <div class="readiness-circle">
+
+                    <strong>
+                        {{ placement_readiness }}%
+                    </strong>
+
+                </div>
+
+
+                <span>
+                    Placement Readiness
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- OVERVIEW CARDS -->
+        <!-- ================================================= -->
+
+        <section class="dashboard-stat-grid">
+
+
+            <!-- SKILLS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-top">
+
+                    <div class="dashboard-stat-icon">
+                        💡
+                    </div>
+
+                    <span>
+                        SKILLS
+                    </span>
+
+                </div>
+
+
+                <strong class="dashboard-number">
+                    {{ skill_progress }}%
+                </strong>
+
+
+                <div class="dashboard-progress">
+
+                    <div
+                        style="width: {{ skill_progress }}%;">
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Average skill progress
+                </p>
+
+            </div>
+
+
+
+            <!-- DSA -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-top">
+
+                    <div class="dashboard-stat-icon">
+                        💻
+                    </div>
+
+                    <span>
+                        DSA
+                    </span>
+
+                </div>
+
+
+                <strong class="dashboard-number">
+                    {{ solved_count }}
+                </strong>
+
+
+                <div class="dashboard-progress">
+
+                    <div
+                        style="width: {{ dsa_progress }}%;">
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Problems solved
+                </p>
+
+            </div>
+
+
+
+            <!-- CERTIFICATES -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-top">
+
+                    <div class="dashboard-stat-icon">
+                        🏆
+                    </div>
+
+                    <span>
+                        CERTIFICATES
+                    </span>
+
+                </div>
+
+
+                <strong class="dashboard-number">
+                    {{ certificate_count }}
+                </strong>
+
+
+                <div class="dashboard-progress">
+
+                    <div
+                        style="width: {{ certificate_progress }}%;">
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Certificates earned
+                </p>
+
+            </div>
+
+
+
+            <!-- INTERNSHIPS -->
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-top">
+
+                    <div class="dashboard-stat-icon">
+                        💼
+                    </div>
+
+                    <span>
+                        INTERNSHIPS
+                    </span>
+
+                </div>
+
+
+                <strong class="dashboard-number">
+                    {{ internship_count }}
+                </strong>
+
+
+                <div class="dashboard-progress">
+
+                    <div
+                        style="width: {{ internship_progress }}%;">
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Applications tracked
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- PLACEMENT + DSA -->
+        <!-- ================================================= -->
+
+        <section class="dashboard-two-column">
+
+
+            <!-- PLACEMENT PROGRESS -->
+
+            <div class="dashboard-panel">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span>
+                            CAREER PREPARATION
+                        </span>
+
+                        <h2>
+                            Placement Progress
+                        </h2>
+
+                    </div>
+
+
+                    <strong>
+                        {{ placement_readiness }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="large-progress">
+
+                    <div
+                        style="width: {{ placement_readiness }}%;">
+                    </div>
+
+                </div>
+
+
+                <p style="margin: 14px 0 18px; font-size: 13px; color: #777; line-height: 1.6;">
+                    Your placement readiness is calculated from your
+                    skills, DSA practice, certificates and internship activity.
+                </p>
+
+
+                <div class="progress-breakdown">
+
+
+                    <!-- SKILLS : 30% -->
+
+                    <div>
+
+                        <span>
+                            Skills
+                            <small style="display: block; font-size: 11px; opacity: 0.65;">
+                                Weight: 30%
+                            </small>
+                        </span>
+
+                        <strong>
+                            {{ skill_progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <!-- DSA : 30% -->
+
+                    <div>
+
+                        <span>
+                            DSA
+                            <small style="display: block; font-size: 11px; opacity: 0.65;">
+                                Weight: 30%
+                            </small>
+                        </span>
+
+                        <strong>
+                            {{ dsa_progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <!-- CERTIFICATES : 15% -->
+
+                    <div>
+
+                        <span>
+                            Certificates
+                            <small style="display: block; font-size: 11px; opacity: 0.65;">
+                                Weight: 15%
+                            </small>
+                        </span>
+
+                        <strong>
+                            {{ certificate_progress }}%
+                        </strong>
+
+                    </div>
+
+
+                    <!-- INTERNSHIPS : 25% -->
+
+                    <div>
+
+                        <span>
+                            Internships
+                            <small style="display: block; font-size: 11px; opacity: 0.65;">
+                                Weight: 25%
+                            </small>
+                        </span>
+
+                        <strong>
+                            {{ internship_progress }}%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div style="
+                    margin-top: 18px;
+                    padding: 12px 14px;
+                    border-radius: 10px;
+                    background: rgba(0, 0, 0, 0.04);
+                    font-size: 12px;
+                    line-height: 1.6;
+                ">
+
+                    <strong>
+                        Readiness Formula
+                    </strong>
+
+                    <p style="margin: 5px 0 0; opacity: 0.75;">
+
+                        Skills × 30% +
+                        DSA × 30% +
+                        Certificates × 15% +
+                        Internships × 25%
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DSA OVERVIEW -->
+
+            <div class="dashboard-panel">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span>
+                            CODING PRACTICE
+                        </span>
+
+                        <h2>
+                            DSA Overview
+                        </h2>
+
+                    </div>
+
+
+                    <a href="{{ url_for('dsa_page') }}">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="dsa-dashboard-grid">
+
+
+                    <div>
+
+                        <strong>
+                            {{ easy_count }}
+                        </strong>
+
+                        <span>
+                            Easy
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ medium_count }}
+                        </strong>
+
+                        <span>
+                            Medium
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ hard_count }}
+                        </strong>
+
+                        <span>
+                            Hard
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dsa-total">
+
+                    <span>
+                        Total Solved
+                    </span>
+
+                    <strong>
+                        {{ solved_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- RECENT ACTIVITY -->
+        <!-- ================================================= -->
+
+        <section class="dashboard-two-column">
+
+
+            <!-- RECENT INTERNSHIPS -->
+
+            <div class="dashboard-panel">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span>
+                            CAREER ACTIVITY
+                        </span>
+
+                        <h2>
+                            Recent Internships
+                        </h2>
+
+                    </div>
+
+
+                    <a href="{{ url_for('internships_page') }}">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                {% if recent_internships %}
+
+                    <div class="dashboard-list">
+
+                        {% for internship in recent_internships %}
+
+                            <div class="dashboard-list-item">
+
+                                <div class="dashboard-list-icon">
+                                    💼
+                                </div>
+
+
+                                <div class="dashboard-list-info">
+
+                                    <strong>
+                                        {{ internship["company"] }}
+                                    </strong>
+
+                                    <span>
+                                        {{ internship["role"] }}
+                                    </span>
+
+                                </div>
+
+
+                                <span class="dashboard-status">
+
+                                    {{ internship["status"] }}
+
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                {% else %}
+
+                    <div class="dashboard-empty">
+
+                        <div>
+                            💼
+                        </div>
+
+                        <p>
+                            No internship applications yet.
+                        </p>
+
+                        <a href="{{ url_for('internships_page') }}">
+                            Add Internship
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- RECENT CERTIFICATES -->
+
+            <div class="dashboard-panel">
+
+                <div class="dashboard-panel-header">
+
+                    <div>
+
+                        <span>
+                            LEARNING
+                        </span>
+
+                        <h2>
+                            Recent Certificates
+                        </h2>
+
+                    </div>
+
+
+                    <a href="{{ url_for('certificates_page') }}">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                {% if recent_certificates %}
+
+                    <div class="dashboard-list">
+
+                        {% for certificate in recent_certificates %}
+
+                            <div class="dashboard-list-item">
+
+                                <div class="dashboard-list-icon">
+                                    🏆
+                                </div>
+
+
+                                <div class="dashboard-list-info">
+
+                                    <strong>
+                                        {{ certificate["name"] }}
+                                    </strong>
+
+                                    <span>
+                                        {{ certificate["provider"] }}
+                                    </span>
+
+                                </div>
+
+
+                                <span class="dashboard-category">
+
+                                    {{ certificate["category"] }}
+
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                {% else %}
+
+                    <div class="dashboard-empty">
+
+                        <div>
+                            🏆
+                        </div>
+
+                        <p>
+                            No certificates added yet.
+                        </p>
+
+                        <a href="{{ url_for('certificates_page') }}">
+                            Add Certificate
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- QUICK ACTIONS -->
+        <!-- ================================================= -->
+
+        <section class="quick-actions-panel">
+
+
+            <div>
+
+                <span>
+                    QUICK ACTIONS
+                </span>
+
+                <h2>
+                    Continue your preparation
+                </h2>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a href="{{ url_for('skills_page') }}">
+
+                    <div>
+                        💡
+                    </div>
+
+                    <span>
+                        Update Skills
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('dsa_page') }}">
+
+                    <div>
+                        💻
+                    </div>
+
+                    <span>
+                        Add DSA Problem
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('certificates_page') }}">
+
+                    <div>
+                        🏆
+                    </div>
+
+                    <span>
+                        Add Certificate
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('internships_page') }}">
+
+                    <div>
+                        💼
+                    </div>
+
+                    <span>
+                        Track Internship
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

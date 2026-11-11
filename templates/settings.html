@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Settings | CareerPortal</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+
+<body class="settings-page">
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+    <div class="logo-area">
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}" alt="CareerPortal"></div>
+        <div>
+            <h1>CareerPortal</h1>
+            <p>Student Placement</p>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="{{ url_for('home') }}" class="nav-item ">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}" class="nav-item ">
+            <span class="nav-icon">◉</span>
+            <span>Profile</span>
+        </a>
+
+        <a href="{{ url_for('skills_page') }}" class="nav-item ">
+            <span class="nav-icon">◆</span>
+            <span>Skills</span>
+        </a>
+
+        <a href="{{ url_for('dsa_page') }}" class="nav-item ">
+            <span class="nav-icon">▣</span>
+            <span>DSA Tracker</span>
+        </a>
+
+        <a href="{{ url_for('certificates_page') }}" class="nav-item ">
+            <span class="nav-icon">◇</span>
+            <span>Certificates</span>
+        </a>
+
+        <a href="{{ url_for('internships_page') }}" class="nav-item ">
+            <span class="nav-icon">▰</span>
+            <span>Internships</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('settings') }}" class="nav-item active">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="nav-item logout">
+            <span class="nav-icon">⇥</span>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content settings-page-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================= -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <p class="topbar-small">
+                    Student Placement Portal
+                </p>
+
+                <h1>
+                    Settings
+                </h1>
+
+            </div>
+
+
+
+            <div class="user-mini">
+
+
+                <div class="user-avatar">
+
+                    {{ user["name"][0]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <span>
+                        {{ user["registration_no"] }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             SETTINGS CONTENT
+        ================================================= -->
+
+        <section class="settings-container">
+
+
+            <!-- =================================================
+                 APPEARANCE
+            ================================================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Appearance
+                        </h2>
+
+                        <p>
+                            Customize how CareerPortal looks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="settings-icon">
+                        🎨
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="setting-row">
+
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Dark Mode
+                        </h3>
+
+                        <p>
+                            Switch between light and dark appearance.
+                        </p>
+
+                    </div>
+
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCOUNT
+            ================================================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Account
+                        </h2>
+
+                        <p>
+                            Your CareerPortal account information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="settings-icon">
+                        👤
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="account-info">
+
+
+                    <div>
+
+                        <span>
+                            Name
+                        </span>
+
+                        <strong>
+                            {{ user["name"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Registration Number
+                        </span>
+
+                        <strong>
+                            {{ user["registration_no"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong>
+                            {{ user["email"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Department
+                        </span>
+
+                        <strong>
+                            {{ user["department"] }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SECURITY
+            ================================================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Security
+                        </h2>
+
+                        <p>
+                            Manage your account security.
+                        </p>
+
+                    </div>
+
+
+                    <div class="settings-icon">
+                        🔐
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- CHANGE PASSWORD -->
+
+                <div class="setting-action">
+
+
+                    <div>
+
+                        <h3>
+                            Account Password
+                        </h3>
+
+                        <p>
+                            Change your password from your profile.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('profile') }}"
+                        class="settings-btn"
+                    >
+                        Change Password
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- LOGOUT -->
+
+                <div class="setting-action">
+
+
+                    <div>
+
+                        <h3>
+                            Logout
+                        </h3>
+
+                        <p>
+                            Sign out from your CareerPortal account.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{{ url_for('logout') }}"
+                        class="settings-btn danger"
+                    >
+                        Logout
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ABOUT
+            ================================================= -->
+
+            <div class="settings-card about-card">
+
+
+                <div class="settings-card-header">
+
+
+                    <div>
+
+                        <h2>
+                            About CareerPortal
+                        </h2>
+
+                        <p>
+                            Student Placement & Skill Tracker
+                        </p>
+
+                    </div>
+
+
+                    <div class="settings-icon">
+                        🎓
+                    </div>
+
+
+                </div>
+
+
+
+                <p class="about-text">
+
+                    CareerPortal helps students manage their
+                    skills, DSA practice, certificates and
+                    internship applications from one place.
+
+                </p>
+
+
+
+                <div class="version">
+
+                    CareerPortal • Student Placement Portal
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     GLOBAL JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+
+<!-- =====================================================
+     SETTINGS DARK MODE
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toggle =
+        document.getElementById("darkModeToggle");
+
+
+    /* -----------------------------------------------
+       LOAD SAVED THEME
+    ------------------------------------------------ */
+
+    const savedTheme =
+        localStorage.getItem(
+            "careerportal-dark-mode"
+        );
+
+
+    if (savedTheme === "enabled") {
+
+        document.body.classList.add("dark-mode");
+
+        if (toggle) {
+            toggle.checked = true;
+        }
+
+    } else {
+
+        document.body.classList.remove("dark-mode");
+
+        if (toggle) {
+            toggle.checked = false;
+        }
+
+    }
+
+
+
+    /* -----------------------------------------------
+       DARK MODE TOGGLE
+    ------------------------------------------------ */
+
+    if (toggle) {
+
+        toggle.addEventListener(
+            "change",
+            function () {
+
+
+                if (this.checked) {
+
+                    document.body.classList.add(
+                        "dark-mode"
+                    );
+
+                    localStorage.setItem(
+                        "careerportal-dark-mode",
+                        "enabled"
+                    );
+
+                } else {
+
+                    document.body.classList.remove(
+                        "dark-mode"
+                    );
+
+                    localStorage.setItem(
+                        "careerportal-dark-mode",
+                        "disabled"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>

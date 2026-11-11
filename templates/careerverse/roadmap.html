@@ -1,0 +1,42 @@
+{% extends 'careerverse/base.html' %}
+{% block title %}My Personalised Roadmap | CAREERVERSE{% endblock %}
+{% block content %}
+<section class="roadmap-hero">
+  <div class="eyebrow">YOUR AI-ASSISTED LEARNING PATH</div>
+  <h1>One clear route from where you are to where you want to go.</h1>
+  <p>Your current target: <strong>{{ role }}</strong>. CAREERVERSE adapts the route to your background, experience, time and diagnostic. You can change direction whenever you need.</p>
+  <div class="roadmap-actions">
+    <form method="post" class="generate-form">
+      <label for="role-choice">Career direction</label>
+      <select id="role-choice" name="role">
+        {% for role_name in roles %}<option value="{{ role_name }}" {% if role_name==role %}selected{% endif %}>{{ role_name }}</option>{% endfor %}
+      </select>
+      <button class="btn primary" type="submit">{{ 'Regenerate with Gemini ✦' if gemini_enabled else 'Generate my learning path →' }}</button>
+    </form>
+    <span class="ai-status">{% if roadmap_provider=='gemini' %}✦ Personalised by Gemini{% elif roadmap_data %}Curated personalised fallback · Gemini not connected{% else %}Choose a direction and generate your plan{% endif %}</span>
+  </div>
+</section>
+{% if roadmap_data %}
+<section class="roadmap-plan">
+  <div class="section-head"><div><div class="eyebrow">YOUR PLAN</div><h2>{{ roadmap_data.title }}</h2><p>{{ roadmap_data.summary }}</p></div><span class="tag">{{ roadmap_data.weekly_commitment }} / day</span></div>
+  <div class="progress-box"><b>Your progress: {{ step_status|length }} of {{ n_steps }} steps</b><div class="bar"><span style="width:{{ (step_status|length*100/n_steps)|round|int if n_steps else 0 }}%"></span></div>{% if next_step is not none %}<a class="btn primary" href="{{ url_for('careerverse.roadmap_step',i=next_step) }}">{{ 'Continue: ' if step_status else 'Start: ' }}{{ roadmap_data.weeks[next_step].focus }} →</a>{% else %}<span class="tag">All steps completed 🎉</span>{% endif %}</div><div class="plan-assumptions"><strong>How to use this plan</strong><ul>{% for item in roadmap_data.starting_assumptions %}<li>{{ item }}</li>{% endfor %}</ul></div>
+  <div class="week-grid">
+    {% for week in roadmap_data.weeks %}
+    <article class="week-card {{ 'is-done' if loop.index0 in step_status }}"><div class="week-period">{{ week.period }} {{ '· ✓ done' if loop.index0 in step_status }}</div><h3>{{ week.focus }}</h3><p>{{ week.learn_and_practise }}</p><div class="proof"><b>Proof to create</b><span>{{ week.proof_of_skill }}</span></div><a class="btn {{ 'primary' if loop.index0==next_step }}" href="{{ url_for('careerverse.roadmap_step',i=loop.index0) }}">{{ 'Review step' if loop.index0 in step_status else ('Start this step →' if loop.index0==next_step else 'Open step →') }}</a></article>
+    {% endfor %}
+  </div>
+  <div class="job-check"><div><div class="eyebrow">CAREER PREPARATION</div><h2>Before applying for roles</h2></div><ul>{% for item in roadmap_data.job_readiness_checklist %}<li>{{ item }}</li>{% endfor %}</ul><div class="next-action"><b>Your next action</b><p>{{ roadmap_data.next_action }}</p></div></div>
+</section>
+{% else %}
+<div class="notice"><b>Ready to create your roadmap?</b> Choose a career direction above and generate a plan. If Gemini is not configured, CAREERVERSE will still provide a curated learning path.</div>
+{% endif %}
+<section class="section-head"><div><div class="eyebrow">FREE LEARNING LIBRARY</div><h2>Learn from trusted resources.</h2><p>Use these free courses, videos, documentation and practical labs alongside your roadmap. A resource is a starting point—build something to prove what you learned.</p></div><a class="text-link" href="{{ url_for('careerverse.resources') }}">Explore resources →</a></section>
+<div class="resource-grid">
+{% for resource in resources %}
+<article class="resource-card"><div class="resource-top"><span class="tag">{{ resource.kind }}</span><span class="resource-level">{{ resource.level }}</span></div><h3>{{ resource.title }}</h3><p>{{ resource.why }}</p><a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">Open learning resource ↗</a></article>
+{% endfor %}
+</div>
+<section class="section-head"><div><div class="eyebrow">STRUCTURED PRACTICE</div><h2>Continue inside CAREERVERSE.</h2><p>External resources explain the concepts. Use these tracks to practise and record your learning.</p></div></section>
+<div class="track-grid">{% for id in track_ids %}<a class="track-card" href="{{ url_for('careerverse.track',track_id=id) }}"><span class="tag">{{ tracks[id].level }}</span><h3>{{ tracks[id].title }}</h3><p>{{ tracks[id].description }}</p><b>Open track →</b></a>{% endfor %}</div>
+<div class="career-cta-grid"><a class="feature" href="{{ url_for('careerverse.projects') }}"><b>Project Studio</b><span>Build projects and document your contribution.</span></a><a class="feature" href="{{ url_for('careerverse.evidence') }}"><b>Skill Evidence</b><span>Show practical proof, not only course completion.</span></a><a class="feature" href="{{ url_for('recruitment_lab') }}"><b>Recruitment Intelligence Lab</b><span>Practise assessments and interview rounds.</span></a></div>
+{% endblock %}

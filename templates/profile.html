@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPortal | My Profile</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+
+<body class="profile-page">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <!-- LOGO -->
+    <div class="logo-area">
+
+        <div class="logo-icon">
+            <img
+                src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}"
+                alt="CareerPortal"
+            >
+        </div>
+
+        <div>
+            <h1>CareerPortal</h1>
+            <p>Student Portal</p>
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <nav class="sidebar-nav">
+
+        <a
+            href="/"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                🏠
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+        </a>
+
+
+        <a
+            href="/profile"
+            class="nav-item active"
+        >
+            <span class="nav-icon">
+                👤
+            </span>
+
+            <span>
+                My Profile
+            </span>
+        </a>
+
+
+        <a
+            href="/skills"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                💡
+            </span>
+
+            <span>
+                Skills
+            </span>
+        </a>
+
+
+        <a
+            href="/dsa"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                💻
+            </span>
+
+            <span>
+                DSA Tracker
+            </span>
+        </a>
+
+
+        <a
+            href="/certificates"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                🏆
+            </span>
+
+            <span>
+                Certificates
+            </span>
+        </a>
+
+
+        <a
+            href="/internships"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                💼
+            </span>
+
+            <span>
+                Internships
+            </span>
+        </a>
+
+    </nav>
+
+
+    <!-- BOTTOM -->
+    <div class="sidebar-bottom">
+
+        <a
+            href="/settings"
+            class="nav-item"
+        >
+            <span class="nav-icon">
+                ⚙️
+            </span>
+
+            <span>
+                Settings
+            </span>
+        </a>
+
+
+        <a
+            href="/logout"
+            class="nav-item logout"
+        >
+            <span class="nav-icon">
+                🚪
+            </span>
+
+            <span>
+                Logout
+            </span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content profile-page-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================= -->
+
+    <header class="top-header">
+
+        <div>
+
+            <h2>
+                My Profile
+            </h2>
+
+            <p>
+                Manage your student information
+            </p>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="header-profile">
+
+                <div class="profile-avatar">
+                    {{ user["name"][0]|upper }}
+                </div>
+
+
+                <div class="header-profile-info">
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <span>
+                        {{ user["registration_no"] }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PAGE CONTENT
+    ================================================= -->
+
+    <div class="page-content">
+
+
+        <!-- =================================================
+             PROFILE HERO
+        ================================================= -->
+
+        <section class="profile-hero">
+
+            <div class="profile-hero-avatar">
+                {{ user["name"][0]|upper }}
+            </div>
+
+
+            <div class="profile-hero-info">
+
+                <h1>
+                    {{ user["name"] }}
+                </h1>
+
+                <p>
+                    {{ user["registration_no"] }}
+                </p>
+
+                <span>
+                    🎓 {{ user["department"] }}
+                    •
+                    Year {{ user["year"] }}
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PROFILE GRID
+        ================================================= -->
+
+        <div class="profile-grid">
+
+
+            <!-- =================================================
+                 PERSONAL INFORMATION
+            ================================================= -->
+
+            <section class="dashboard-card">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            👤 Personal Information
+                        </h2>
+
+                        <p>
+                            Update your student details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL ERROR -->
+
+                {% if request.args.get("error") == "email_exists" %}
+
+                <div class="profile-alert error">
+
+                    This email is already registered
+                    to another student.
+
+                </div>
+
+                {% endif %}
+
+
+                {% if request.args.get("profile_success") == "1" %}
+
+                <div class="profile-alert success">
+                    Profile information saved successfully.
+                </div>
+
+                {% endif %}
+
+
+
+                <!-- PROFILE FORM -->
+
+                <form
+                    method="POST"
+                    action="/update-profile"
+                    class="profile-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            value="{{ user['name'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- REGISTRATION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Registration Number
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ user['registration_no'] }}"
+                            disabled
+                        >
+
+                        <small>
+                            Registration number cannot be changed.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value="{{ user['email'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- DEPARTMENT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select
+                            name="department"
+                            required
+                        >
+
+                            <option
+                                value="B.Tech CSE"
+                                {% if user["department"] == "B.Tech CSE" %}
+                                selected
+                                {% endif %}
+                            >
+                                B.Tech CSE
+                            </option>
+
+
+                            <option
+                                value="CSE"
+                                {% if user["department"] == "CSE" %}
+                                selected
+                                {% endif %}
+                            >
+                                Computer Science & Engineering
+                            </option>
+
+
+                            <option
+                                value="ECE"
+                                {% if user["department"] == "ECE" %}
+                                selected
+                                {% endif %}
+                            >
+                                Electronics & Communication
+                            </option>
+
+
+                            <option
+                                value="EEE"
+                                {% if user["department"] == "EEE" %}
+                                selected
+                                {% endif %}
+                            >
+                                Electrical & Electronics
+                            </option>
+
+
+                            <option
+                                value="MECH"
+                                {% if user["department"] == "MECH" %}
+                                selected
+                                {% endif %}
+                            >
+                                Mechanical Engineering
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- YEAR -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Year
+                        </label>
+
+                        <select
+                            name="year"
+                            required
+                        >
+
+                            <option
+                                value="1"
+                                {% if user["year"]|int == 1 %}
+                                selected
+                                {% endif %}
+                            >
+                                1st Year
+                            </option>
+
+
+                            <option
+                                value="2"
+                                {% if user["year"]|int == 2 %}
+                                selected
+                                {% endif %}
+                            >
+                                2nd Year
+                            </option>
+
+
+                            <option
+                                value="3"
+                                {% if user["year"]|int == 3 %}
+                                selected
+                                {% endif %}
+                            >
+                                3rd Year
+                            </option>
+
+
+                            <option
+                                value="4"
+                                {% if user["year"]|int == 4 %}
+                                selected
+                                {% endif %}
+                            >
+                                4th Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SAVE -->
+
+                    <button
+                        type="submit"
+                        class="save-profile-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PLACEMENT PROGRESS
+            ================================================= -->
+
+            <section class="dashboard-card">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            📊 Placement Progress
+                        </h2>
+
+                        <p>
+                            Your current preparation
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OVERALL PROGRESS -->
+
+                <div class="profile-progress-circle">
+
+                    <div>
+
+                        <strong>
+                            {{ overall_progress }}%
+                        </strong>
+
+                        <span>
+                            Ready
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROGRESS LIST -->
+
+                <div class="profile-progress-list">
+
+
+                    <!-- SKILLS -->
+
+                    <div class="profile-progress-row">
+
+                        <div>
+
+                            <span>
+                                💻 Skills
+                            </span>
+
+                            <strong>
+                                {{ skill_progress }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-progress-track">
+
+                            <div
+                                style="width: {{ skill_progress }}%;"
+                                class="skills-progress"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DSA -->
+
+                    <div class="profile-progress-row">
+
+                        <div>
+
+                            <span>
+                                🧠 DSA
+                            </span>
+
+                            <strong>
+                                {{ dsa_score }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-progress-track">
+
+                            <div
+                                style="width: {{ dsa_score }}%;"
+                                class="dsa-progress"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CERTIFICATES -->
+
+                    <div class="profile-progress-row">
+
+                        <div>
+
+                            <span>
+                                🏆 Certificates
+                            </span>
+
+                            <strong>
+                                {{ certificate_score }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-progress-track">
+
+                            <div
+                                style="width: {{ certificate_score }}%;"
+                                class="certificate-progress"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CAREER INFORMATION
+        ================================================= -->
+
+        <section class="dashboard-card career-information-card">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>🎯 Career Information</h2>
+                    <p>Your professional profile information</p>
+                </div>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ url_for('update_profile') }}"
+                class="profile-form career-form"
+            >
+
+                <div class="form-group">
+                    <label for="career_role">Career Role</label>
+                    <input
+                        type="text"
+                        id="career_role"
+                        name="career_role"
+                        value="{{ user['career_role'] or '' }}"
+                        placeholder="e.g. Software Engineer / Data Scientist"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="github">GitHub</label>
+                    <input
+                        type="url"
+                        id="github"
+                        name="github"
+                        value="{{ user['github'] or '' }}"
+                        placeholder="https://github.com/username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn</label>
+                    <input
+                        type="url"
+                        id="linkedin"
+                        name="linkedin"
+                        value="{{ user['linkedin'] or '' }}"
+                        placeholder="https://linkedin.com/in/username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value="{{ user['phone'] or '' }}"
+                        placeholder="Enter your phone number"
+                    >
+                </div>
+
+                <div class="form-group career-bio-group">
+                    <label for="bio">About Me</label>
+                    <textarea
+                        id="bio"
+                        name="bio"
+                        rows="5"
+                        placeholder="Write a short professional introduction about yourself..."
+                        style="width:100%; box-sizing:border-box; resize:vertical; padding:14px 16px; border:1px solid #dfe3eb; border-radius:10px; font:inherit; background:inherit; color:inherit; line-height:1.5;"
+                    >{{ user['bio'] or '' }}</textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="save-profile-btn"
+                >
+                    Save Career Information
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACCOUNT SECURITY
+        ================================================= -->
+
+        <section class="dashboard-card security-card">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        🔐 Account Security
+                    </h2>
+
+                    <p>
+                        Change your account password
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASSWORD ERRORS -->
+
+            {% if request.args.get("password_error") == "wrong_current" %}
+
+            <div class="profile-alert error">
+
+                Current password is incorrect.
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if request.args.get("password_error") == "mismatch" %}
+
+            <div class="profile-alert error">
+
+                New passwords do not match.
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if request.args.get("password_error") == "short" %}
+
+            <div class="profile-alert error">
+
+                Password must contain at least 6 characters.
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- PASSWORD SUCCESS -->
+
+            {% if request.args.get("password_success") == "1" %}
+
+            <div class="profile-alert success">
+
+                Password changed successfully.
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- PASSWORD FORM -->
+
+            <form
+                method="POST"
+                action="/change-password"
+                class="password-form"
+            >
+
+
+                <!-- CURRENT PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="current_password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- NEW PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="new_password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CHANGE PASSWORD -->
+
+                <button
+                    type="submit"
+                    class="change-password-btn"
+                >
+                    Change Password
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 CareerPortal • Student Placement Management System
+            </p>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     GLOBAL JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>

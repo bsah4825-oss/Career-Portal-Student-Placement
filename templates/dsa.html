@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPortal | DSA Tracker</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="dsa-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+
+            <img
+                src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}"
+                alt="CareerPortal"
+            >
+
+        </div>
+
+        <div>
+
+            <h1>CareerPortal</h1>
+
+            <p>Student Placement</p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('profile') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◉</span>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('skills_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◆</span>
+
+            <span>Skills</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('dsa_page') }}"
+            class="nav-item active"
+        >
+
+            <span class="nav-icon">▣</span>
+
+            <span>DSA Tracker</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('certificates_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◇</span>
+
+            <span>Certificates</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('internships_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">▰</span>
+
+            <span>Internships</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="{{ url_for('settings') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-item logout"
+        >
+
+            <span class="nav-icon">⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content dsa-page-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================= -->
+
+    <header class="top-header">
+
+        <div>
+
+            <h2>
+                DSA Tracker
+            </h2>
+
+            <p>
+                Track your problem-solving journey
+            </p>
+
+        </div>
+
+
+        <div class="header-profile">
+
+            <div class="profile-avatar">
+
+                {{ user["name"][0].upper() }}
+
+            </div>
+
+
+            <div class="header-profile-info">
+
+                <strong>
+                    {{ user["name"] }}
+                </strong>
+
+                <span>
+                    {{ user["registration_no"] }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="page-content">
+
+
+        <!-- =================================================
+             DSA HERO
+        ================================================= -->
+
+        <section class="dsa-hero">
+
+            <div>
+
+                <span class="dsa-label">
+                    DATA STRUCTURES & ALGORITHMS
+                </span>
+
+
+                <h1>
+                    Keep Solving. Keep Growing. 🧠
+                </h1>
+
+
+                <p>
+                    Track your DSA problems and build
+                    consistency for technical interviews.
+                </p>
+
+            </div>
+
+
+            <div class="dsa-progress-circle">
+
+                <strong>
+                    {{ solving_progress }}%
+                </strong>
+
+                <span>
+                    Solved
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STAT CARDS
+        ================================================= -->
+
+        <div class="dsa-stats">
+
+
+            <!-- TOTAL -->
+
+            <div class="dsa-stat-card">
+
+                <div class="dsa-stat-icon">
+                    📚
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Total Problems
+                    </span>
+
+                    <strong>
+                        {{ total_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SOLVED -->
+
+            <div class="dsa-stat-card solved">
+
+                <div class="dsa-stat-icon">
+                    ✅
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Solved
+                    </span>
+
+                    <strong>
+                        {{ solved_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ATTEMPTED -->
+
+            <div class="dsa-stat-card attempted">
+
+                <div class="dsa-stat-icon">
+                    🔄
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Attempted
+                    </span>
+
+                    <strong>
+                        {{ attempted_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HARD -->
+
+            <div class="dsa-stat-card hard">
+
+                <div class="dsa-stat-icon">
+                    🔥
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Hard Solved
+                    </span>
+
+                    <strong>
+                        {{ hard_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DIFFICULTY
+        ================================================= -->
+
+        <section class="dashboard-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Problem Difficulty
+                    </h2>
+
+                    <p>
+                        Your solved problems by difficulty
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="difficulty-grid">
+
+
+                <!-- EASY -->
+
+                <div class="difficulty-card easy">
+
+                    <div class="difficulty-top">
+
+                        <span>
+                            🟢 Easy
+                        </span>
+
+                        <strong>
+                            {{ easy_count }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="difficulty-bar">
+
+                        <div
+                            style="width:
+                            {% if solved_count > 0 %}
+                                {{ (easy_count / solved_count * 100)|round }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                            "
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MEDIUM -->
+
+                <div class="difficulty-card medium">
+
+                    <div class="difficulty-top">
+
+                        <span>
+                            🟡 Medium
+                        </span>
+
+                        <strong>
+                            {{ medium_count }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="difficulty-bar">
+
+                        <div
+                            style="width:
+                            {% if solved_count > 0 %}
+                                {{ (medium_count / solved_count * 100)|round }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                            "
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- HARD -->
+
+                <div class="difficulty-card hard">
+
+                    <div class="difficulty-top">
+
+                        <span>
+                            🔴 Hard
+                        </span>
+
+                        <strong>
+                            {{ hard_count }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="difficulty-bar">
+
+                        <div
+                            style="width:
+                            {% if solved_count > 0 %}
+                                {{ (hard_count / solved_count * 100)|round }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                            "
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ADD PROBLEM
+        ================================================= -->
+
+        <section class="dashboard-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        ➕ Add DSA Problem
+                    </h2>
+
+                    <p>
+                        Record a problem you are solving.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="{{ url_for('add_problem') }}"
+                method="POST"
+                class="dsa-form"
+            >
+
+
+                <!-- PROBLEM NAME -->
+
+                <div class="dsa-form-group">
+
+                    <label for="problem_name">
+                        Problem Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="problem_name"
+                        name="problem_name"
+                        placeholder="Example: Two Sum"
+                        maxlength="200"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PLATFORM -->
+
+                <div class="dsa-form-group">
+
+                    <label for="platform">
+                        Platform
+                    </label>
+
+
+                    <select
+                        name="platform"
+                        id="platform"
+                    >
+
+                        <option value="LeetCode">
+                            LeetCode
+                        </option>
+
+                        <option value="HackerRank">
+                            HackerRank
+                        </option>
+
+                        <option value="CodeChef">
+                            CodeChef
+                        </option>
+
+                        <option value="Codeforces">
+                            Codeforces
+                        </option>
+
+                        <option value="GeeksforGeeks">
+                            GeeksforGeeks
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DIFFICULTY -->
+
+                <div class="dsa-form-group">
+
+                    <label for="difficulty">
+                        Difficulty
+                    </label>
+
+
+                    <select
+                        name="difficulty"
+                        id="difficulty"
+                    >
+
+                        <option value="Easy">
+                            Easy
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="Hard">
+                            Hard
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="dsa-form-group">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+
+                    <select
+                        name="status"
+                        id="status"
+                    >
+
+                        <option value="Solved">
+                            Solved
+                        </option>
+
+                        <option value="Attempted">
+                            Attempted
+                        </option>
+
+                        <option value="Not Started">
+                            Not Started
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="dsa-add-btn"
+                >
+
+                    Add Problem →
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DSA PROBLEM LIST
+        ================================================= -->
+
+        <section class="dashboard-card">
+
+
+            <div class="dsa-list-header">
+
+                <div>
+
+                    <h2>
+                        🧠 My DSA Problems
+                    </h2>
+
+                    <p>
+                        Your tracked coding problems
+                    </p>
+
+                </div>
+
+
+                <div class="dsa-search">
+
+                    <span>
+                        🔎
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="problemSearch"
+                        placeholder="Search problem..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            {% if problems %}
+
+
+            <div class="dsa-table-wrapper">
+
+                <table class="dsa-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Problem
+                            </th>
+
+                            <th>
+                                Platform
+                            </th>
+
+                            <th>
+                                Difficulty
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="problemTable">
+
+
+                    {% for problem in problems %}
+
+
+                    <tr class="problem-row">
+
+
+                        <!-- PROBLEM -->
+
+                        <td>
+
+                            <strong>
+                                {{ problem["problem_name"] }}
+                            </strong>
+
+                        </td>
+
+
+
+                        <!-- PLATFORM -->
+
+                        <td>
+
+                            <span class="platform-badge">
+
+                                {{ problem["platform"] }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- DIFFICULTY -->
+
+                        <td>
+
+
+                            {% if problem["difficulty"] == "Easy" %}
+
+                                <span class="difficulty-badge easy-badge">
+                                    Easy
+                                </span>
+
+
+                            {% elif problem["difficulty"] == "Medium" %}
+
+                                <span class="difficulty-badge medium-badge">
+                                    Medium
+                                </span>
+
+
+                            {% else %}
+
+                                <span class="difficulty-badge hard-badge">
+                                    Hard
+                                </span>
+
+                            {% endif %}
+
+
+                        </td>
+
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+
+                            {% if problem["status"] == "Solved" %}
+
+                                <span class="status-badge solved-badge">
+                                    ✓ Solved
+                                </span>
+
+
+                            {% elif problem["status"] == "Attempted" %}
+
+                                <span class="status-badge attempted-badge">
+                                    ↻ Attempted
+                                </span>
+
+
+                            {% else %}
+
+                                <span class="status-badge notstarted-badge">
+                                    ○ Not Started
+                                </span>
+
+                            {% endif %}
+
+
+                        </td>
+
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+
+                            <button
+                                type="button"
+                                class="table-edit-btn"
+                                onclick='editProblem(
+                                    {{ problem["id"]|tojson }},
+                                    {{ problem["problem_name"]|tojson }},
+                                    {{ problem["platform"]|tojson }},
+                                    {{ problem["difficulty"]|tojson }},
+                                    {{ problem["status"]|tojson }}
+                                )'
+                                aria-label="Edit {{ problem['problem_name'] }}"
+                                title="Edit problem"
+                            >
+
+                                ✏️
+
+                            </button>
+
+
+                            <a
+                                href="{{ url_for('delete_problem', id=problem['id']) }}"
+                                class="table-delete-btn"
+                                onclick="return confirm('Delete this problem?')"
+                                aria-label="Delete {{ problem['problem_name'] }}"
+                                title="Delete problem"
+                            >
+
+                                🗑️
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================= -->
+
+            <div class="empty-dsa">
+
+                <div>
+                    🧠
+                </div>
+
+
+                <h3>
+                    No DSA problems yet
+                </h3>
+
+
+                <p>
+                    Add your first problem above
+                    to start your DSA journey.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 CareerPortal • Student Placement Management System
+            </p>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     EDIT PROBLEM MODAL
+===================================================== -->
+
+<div
+    id="editProblemModal"
+    class="skill-modal"
+>
+
+
+    <div class="skill-modal-box">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="skill-modal-header">
+
+            <div>
+
+                <h2>
+                    Edit Problem
+                </h2>
+
+                <p>
+                    Update your DSA problem
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeEditProblem()"
+                aria-label="Close"
+            >
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- EDIT FORM -->
+
+        <form
+            id="editProblemForm"
+            method="POST"
+        >
+
+
+            <!-- PROBLEM NAME -->
+
+            <div class="skill-form-group">
+
+                <label for="editProblemName">
+                    Problem Name
+                </label>
+
+
+                <input
+                    type="text"
+                    name="problem_name"
+                    id="editProblemName"
+                    maxlength="200"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PLATFORM -->
+
+            <div class="skill-form-group">
+
+                <label for="editProblemPlatform">
+                    Platform
+                </label>
+
+
+                <select
+                    name="platform"
+                    id="editProblemPlatform"
+                >
+
+                    <option value="LeetCode">
+                        LeetCode
+                    </option>
+
+                    <option value="HackerRank">
+                        HackerRank
+                    </option>
+
+                    <option value="CodeChef">
+                        CodeChef
+                    </option>
+
+                    <option value="Codeforces">
+                        Codeforces
+                    </option>
+
+                    <option value="GeeksforGeeks">
+                        GeeksforGeeks
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- DIFFICULTY -->
+
+            <div class="skill-form-group">
+
+                <label for="editProblemDifficulty">
+                    Difficulty
+                </label>
+
+
+                <select
+                    name="difficulty"
+                    id="editProblemDifficulty"
+                >
+
+                    <option value="Easy">
+                        Easy
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Hard">
+                        Hard
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div class="skill-form-group">
+
+                <label for="editProblemStatus">
+                    Status
+                </label>
+
+
+                <select
+                    name="status"
+                    id="editProblemStatus"
+                >
+
+                    <option value="Solved">
+                        Solved
+                    </option>
+
+                    <option value="Attempted">
+                        Attempted
+                    </option>
+
+                    <option value="Not Started">
+                        Not Started
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MODAL BUTTONS -->
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closeEditProblem()"
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-save"
+                >
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     DSA JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   SEARCH PROBLEMS
+===================================================== */
+
+function searchProblems() {
+
+    const searchInput =
+        document.getElementById("problemSearch");
+
+
+    if (!searchInput) {
+        return;
+    }
+
+
+    const search =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const rows =
+        document.querySelectorAll(
+            ".problem-row"
+        );
+
+
+    rows.forEach(function(row) {
+
+        const text =
+            row.textContent.toLowerCase();
+
+
+        if (text.includes(search)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+
+/* =====================================================
+   EDIT PROBLEM
+===================================================== */
+
+function editProblem(
+    id,
+    name,
+    platform,
+    difficulty,
+    status
+) {
+
+    const modal =
+        document.getElementById(
+            "editProblemModal"
+        );
+
+
+    const form =
+        document.getElementById(
+            "editProblemForm"
+        );
+
+
+    if (!modal || !form) {
+        return;
+    }
+
+
+    /*
+       Generate the correct Flask route.
+
+       The placeholder route is rendered by Flask,
+       then JavaScript replaces the placeholder ID.
+    */
+
+    form.action =
+        "{{ url_for('update_problem', id=0) }}"
+        .replace(
+            "/0",
+            "/" + id
+        );
+
+
+    document.getElementById(
+        "editProblemName"
+    ).value = name;
+
+
+    document.getElementById(
+        "editProblemPlatform"
+    ).value = platform;
+
+
+    document.getElementById(
+        "editProblemDifficulty"
+    ).value = difficulty;
+
+
+    document.getElementById(
+        "editProblemStatus"
+    ).value = status;
+
+
+    modal.classList.add("show");
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE EDIT MODAL
+===================================================== */
+
+function closeEditProblem() {
+
+    const modal =
+        document.getElementById(
+            "editProblemModal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove("show");
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   SEARCH EVENT
+===================================================== */
+
+const problemSearch =
+    document.getElementById(
+        "problemSearch"
+    );
+
+
+if (problemSearch) {
+
+    problemSearch.addEventListener(
+        "input",
+        searchProblems
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+===================================================== */
+
+const editProblemModal =
+    document.getElementById(
+        "editProblemModal"
+    );
+
+
+if (editProblemModal) {
+
+    editProblemModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+
+                closeEditProblem();
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL WITH ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeEditProblem();
+
+        }
+
+    }
+);
+
+</script>
+
+
+
+<!-- =====================================================
+     GLOBAL JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+
+</body>
+
+</html>

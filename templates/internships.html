@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Internships | Placement Tracker</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="portal-layout">
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
+
+    <aside class="sidebar">
+
+    <div class="logo-area">
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}" alt="CareerPortal"></div>
+        <div>
+            <h1>CareerPortal</h1>
+            <p>Student Placement</p>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="{{ url_for('home') }}" class="nav-item ">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}" class="nav-item ">
+            <span class="nav-icon">◉</span>
+            <span>Profile</span>
+        </a>
+
+        <a href="{{ url_for('skills_page') }}" class="nav-item ">
+            <span class="nav-icon">◆</span>
+            <span>Skills</span>
+        </a>
+
+        <a href="{{ url_for('dsa_page') }}" class="nav-item ">
+            <span class="nav-icon">▣</span>
+            <span>DSA Tracker</span>
+        </a>
+
+        <a href="{{ url_for('certificates_page') }}" class="nav-item ">
+            <span class="nav-icon">◇</span>
+            <span>Certificates</span>
+        </a>
+
+        <a href="{{ url_for('internships_page') }}" class="nav-item active">
+            <span class="nav-icon">▰</span>
+            <span>Internships</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('settings') }}" class="nav-item ">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="nav-item logout">
+            <span class="nav-icon">⇥</span>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================= -->
+
+    <main class="main-content internship-page-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="topbar-small">
+                    Career Management
+                </p>
+
+                <h1>Internship Tracker</h1>
+
+            </div>
+
+
+            <div class="user-mini">
+
+                <div class="user-avatar">
+                    {{ user["name"][0]|upper }}
+                </div>
+
+                <div>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <span>
+                        {{ user["registration_no"] }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- HERO -->
+        <!-- ================================================= -->
+
+        <section class="internship-hero">
+
+            <div>
+
+                <span class="internship-label">
+                    CAREER PROGRESS
+                </span>
+
+                <h2>
+                    Track your internship journey
+                </h2>
+
+                <p>
+                    Keep all your internship applications,
+                    interviews and offers organized in one place.
+                </p>
+
+            </div>
+
+
+            <div class="internship-hero-icon">
+                💼
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- STATISTICS -->
+        <!-- ================================================= -->
+
+        <section class="internship-stats">
+
+
+            <div class="internship-stat-card">
+
+                <div class="internship-stat-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        {{ total_internships }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="internship-stat-card">
+
+                <div class="internship-stat-icon">
+                    📤
+                </div>
+
+                <div>
+
+                    <span>
+                        Applied
+                    </span>
+
+                    <strong>
+                        {{ applied_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="internship-stat-card">
+
+                <div class="internship-stat-icon">
+                    🎤
+                </div>
+
+                <div>
+
+                    <span>
+                        Interview
+                    </span>
+
+                    <strong>
+                        {{ interview_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="internship-stat-card">
+
+                <div class="internship-stat-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <span>
+                        Selected
+                    </span>
+
+                    <strong>
+                        {{ selected_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="internship-stat-card">
+
+                <div class="internship-stat-icon">
+                    ❌
+                </div>
+
+                <div>
+
+                    <span>
+                        Rejected
+                    </span>
+
+                    <strong>
+                        {{ rejected_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- ADD INTERNSHIP -->
+        <!-- ================================================= -->
+
+        <section class="internship-form-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span>
+                        ADD APPLICATION
+                    </span>
+
+                    <h2>
+                        New Internship
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="/add-internship"
+                method="POST"
+                class="internship-form">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Company
+                    </label>
+
+                    <input
+                        type="text"
+                        name="company"
+                        placeholder="e.g. Microsoft"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Role
+                    </label>
+
+                    <input
+                        type="text"
+                        name="role"
+                        placeholder="e.g. Software Developer Intern"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select name="status">
+
+                        <option value="Saved">
+                            Saved
+                        </option>
+
+                        <option value="Applied">
+                            Applied
+                        </option>
+
+                        <option value="Interview">
+                            Interview
+                        </option>
+
+                        <option value="Selected">
+                            Selected
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Application Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="application_date">
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    + Add Internship
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- INTERNSHIP LIST -->
+        <!-- ================================================= -->
+
+        <section class="internship-list-section">
+
+
+            <div class="internship-list-header">
+
+                <div>
+
+                    <span>
+                        APPLICATIONS
+                    </span>
+
+                    <h2>
+                        Your Internships
+                    </h2>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="internshipSearch"
+                    class="internship-search"
+                    placeholder="🔎 Search company or role...">
+
+            </div>
+
+
+
+            {% if internships %}
+
+            <div class="internship-table-wrapper">
+
+                <table class="internship-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Company
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Applied On
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="internshipTableBody">
+
+                    {% for internship in internships %}
+
+                    <tr class="internship-row">
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <div class="company-logo">
+                                    {{ internship["company"][0]|upper }}
+                                </div>
+
+                                <strong>
+                                    {{ internship["company"] }}
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            {{ internship["role"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if internship["status"] == "Selected" %}
+
+                            <span class="status-badge selected">
+                                ✓ Selected
+                            </span>
+
+                            {% elif internship["status"] == "Interview" %}
+
+                            <span class="status-badge interview">
+                                🎤 Interview
+                            </span>
+
+                            {% elif internship["status"] == "Applied" %}
+
+                            <span class="status-badge applied">
+                                📤 Applied
+                            </span>
+
+                            {% elif internship["status"] == "Rejected" %}
+
+                            <span class="status-badge rejected">
+                                ✕ Rejected
+                            </span>
+
+                            {% else %}
+
+                            <span class="status-badge saved">
+                                🔖 Saved
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if internship["application_date"] %}
+
+                                {{ internship["application_date"] }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="internship-actions">
+
+                                <button
+                                    class="edit-btn"
+                                    onclick="openInternshipModal(
+                                        {{ internship['id'] }},
+                                        '{{ internship['company']|replace("'", "\\'") }}',
+                                        '{{ internship['role']|replace("'", "\\'") }}',
+                                        '{{ internship['status'] }}',
+                                        '{{ internship['application_date'] or '' }}'
+                                    )">
+
+                                    ✏️
+
+                                </button>
+
+
+                                <a
+                                    href="/delete-internship/{{ internship['id'] }}"
+                                    class="delete-btn"
+                                    onclick="return confirm('Delete this internship application?')">
+
+                                    🗑️
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty-internships">
+
+                <div class="empty-icon">
+                    💼
+                </div>
+
+                <h3>
+                    No internships yet
+                </h3>
+
+                <p>
+                    Add your first internship application above
+                    to start tracking your career journey.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- EDIT MODAL -->
+<!-- ===================================================== -->
+
+<div
+    id="internshipModal"
+    class="modal-overlay">
+
+
+    <div class="internship-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span>
+                    EDIT APPLICATION
+                </span>
+
+                <h2>
+                    Update Internship
+                </h2>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                onclick="closeInternshipModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <form
+            id="editInternshipForm"
+            method="POST">
+
+
+            <div class="form-group">
+
+                <label>
+                    Company
+                </label>
+
+                <input
+                    type="text"
+                    name="company"
+                    id="editCompany"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Role
+                </label>
+
+                <input
+                    type="text"
+                    name="role"
+                    id="editRole"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Status
+                </label>
+
+                <select
+                    name="status"
+                    id="editStatus">
+
+                    <option value="Saved">
+                        Saved
+                    </option>
+
+                    <option value="Applied">
+                        Applied
+                    </option>
+
+                    <option value="Interview">
+                        Interview
+                    </option>
+
+                    <option value="Selected">
+                        Selected
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Application Date
+                </label>
+
+                <input
+                    type="date"
+                    name="application_date"
+                    id="editDate">
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn">
+
+                Save Changes
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+function openInternshipModal(
+    id,
+    company,
+    role,
+    status,
+    date
+) {
+
+    document.getElementById(
+        "internshipModal"
+    ).style.display = "flex";
+
+
+    document.getElementById(
+        "editCompany"
+    ).value = company;
+
+
+    document.getElementById(
+        "editRole"
+    ).value = role;
+
+
+    document.getElementById(
+        "editStatus"
+    ).value = status;
+
+
+    document.getElementById(
+        "editDate"
+    ).value = date;
+
+
+    document.getElementById(
+        "editInternshipForm"
+    ).action =
+        "/update-internship/" + id;
+}
+
+
+function closeInternshipModal() {
+
+    document.getElementById(
+        "internshipModal"
+    ).style.display = "none";
+
+}
+
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById(
+            "internshipModal"
+        );
+
+    if (event.target === modal) {
+
+        closeInternshipModal();
+
+    }
+
+};
+
+
+
+/* ===================================================== */
+/* SEARCH */
+/* ===================================================== */
+
+document
+    .getElementById("internshipSearch")
+    .addEventListener(
+        "input",
+        function() {
+
+            const search =
+                this.value.toLowerCase();
+
+            const rows =
+                document.querySelectorAll(
+                    ".internship-row"
+                );
+
+
+            rows.forEach(function(row) {
+
+                const text =
+                    row.textContent.toLowerCase();
+
+
+                if (
+                    text.includes(search)
+                ) {
+
+                    row.style.display = "";
+
+                } else {
+
+                    row.style.display = "none";
+
+                }
+
+            });
+
+        }
+    );
+
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

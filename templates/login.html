@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerPortal | Login</title>
+
+    <!-- IMPORTANT: Connect CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="auth-page">
+
+
+    <div class="auth-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-left">
+
+            <div class="auth-brand">
+
+                <div class="auth-logo"><img src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}" alt="CareerPortal"></div>
+
+                <div>
+
+                    <h2>CareerPortal</h2>
+
+                    <p>Student Placement Portal</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-content">
+
+                <span class="auth-small-title">
+                    STUDENT PLACEMENT SYSTEM
+                </span>
+
+                <h1>
+                    Build your skills.<br>
+                    Prepare for your career.
+                </h1>
+
+                <p>
+                    Manage your placement preparation,
+                    track your skills, DSA progress,
+                    certificates and internships
+                    from one place.
+                </p>
+
+
+                <div class="auth-features">
+
+                    <div>
+                        <span>📊</span>
+                        <p>Track your placement progress</p>
+                    </div>
+
+                    <div>
+                        <span>🧠</span>
+                        <p>Manage your DSA journey</p>
+                    </div>
+
+                    <div>
+                        <span>🏆</span>
+                        <p>Store your certificates</p>
+                    </div>
+
+                    <div>
+                        <span>💼</span>
+                        <p>Track internship applications</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-right">
+
+            <div class="login-card">
+
+
+                <div class="login-header">
+
+                    <div class="login-icon">
+                        👋
+                    </div>
+
+                    <h1>
+                        Welcome Back!
+                    </h1>
+
+                    <p>
+                        Login to access your personal
+                        placement dashboard.
+                    </p>
+
+                </div>
+
+
+                {% if error %}
+
+                <div class="auth-error">
+
+                    {{ error }}
+
+                </div>
+
+                {% endif %}
+
+
+                <form
+                    method="POST"
+                    action="/login"
+                    class="auth-form"
+                >
+
+
+                    <!-- REGISTRATION NUMBER -->
+
+                    <div class="auth-form-group">
+
+                        <label>
+                            Registration Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>🆔</span>
+
+                            <input
+                                type="text"
+                                name="registration_no"
+                                placeholder="Enter registration number"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="auth-form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>🔒</span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+
+                        Login
+
+                        <span>→</span>
+
+                    </button>
+
+
+                </form>
+
+
+                <div class="auth-divider">
+
+                    <span>New student?</span>
+
+                </div>
+
+
+                <a
+                    href="/register"
+                    class="create-account"
+                >
+
+                    Create Your Account
+
+                </a>
+
+
+                <p class="login-footer">
+
+                    © 2026 CareerPortal
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

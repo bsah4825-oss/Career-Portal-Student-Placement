@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPortal | Certificates</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="certificate-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+
+            <img
+                src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}"
+                alt="CareerPortal"
+            >
+
+        </div>
+
+        <div>
+
+            <h1>CareerPortal</h1>
+
+            <p>Student Placement</p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('profile') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◉</span>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('skills_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◆</span>
+
+            <span>Skills</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('dsa_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">▣</span>
+
+            <span>DSA Tracker</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('certificates_page') }}"
+            class="nav-item active"
+        >
+
+            <span class="nav-icon">◇</span>
+
+            <span>Certificates</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('internships_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">▰</span>
+
+            <span>Internships</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="{{ url_for('settings') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-item logout"
+        >
+
+            <span class="nav-icon">⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content certificate-page-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================= -->
+
+    <header class="top-header">
+
+        <div>
+
+            <h2>
+                Certificates
+            </h2>
+
+            <p>
+                Manage your professional achievements
+            </p>
+
+        </div>
+
+
+        <div class="header-profile">
+
+            <div class="profile-avatar">
+
+                {{ user["name"][0].upper() }}
+
+            </div>
+
+
+            <div class="header-profile-info">
+
+                <strong>
+                    {{ user["name"] }}
+                </strong>
+
+                <span>
+                    {{ user["registration_no"] }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="page-content">
+
+
+        <!-- =================================================
+             HERO
+        ================================================= -->
+
+        <section class="certificate-hero">
+
+            <div>
+
+                <span class="certificate-label">
+                    ACHIEVEMENTS & CERTIFICATIONS
+                </span>
+
+
+                <h1>
+                    Showcase Your Achievements 🏆
+                </h1>
+
+
+                <p>
+                    Keep all your certifications organized
+                    in one place.
+                </p>
+
+            </div>
+
+
+            <div class="certificate-total">
+
+                <strong>
+                    {{ total_certificates }}
+                </strong>
+
+                <span>
+                    Certificates
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATS
+        ================================================= -->
+
+        <div class="certificate-stats">
+
+
+            <!-- PROGRAMMING -->
+
+            <div class="certificate-stat-card">
+
+                <div class="certificate-stat-icon">
+                    💻
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Programming
+                    </span>
+
+                    <strong>
+                        {{ programming_certificates }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WEB DEVELOPMENT -->
+
+            <div class="certificate-stat-card">
+
+                <div class="certificate-stat-icon blue">
+                    🌐
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Web Development
+                    </span>
+
+                    <strong>
+                        {{ web_certificates }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DATA / AI -->
+
+            <div class="certificate-stat-card">
+
+                <div class="certificate-stat-icon green">
+                    🤖
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Data / AI
+                    </span>
+
+                    <strong>
+                        {{ data_certificates }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OTHER -->
+
+            <div class="certificate-stat-card">
+
+                <div class="certificate-stat-icon orange">
+                    ⭐
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Other
+                    </span>
+
+                    <strong>
+                        {{ other_certificates }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADD CERTIFICATE
+        ================================================= -->
+
+        <section class="dashboard-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        ➕ Add Certificate
+                    </h2>
+
+                    <p>
+                        Add a certification you've completed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                action="{{ url_for('add_certificate') }}"
+                method="POST"
+                class="certificate-form"
+            >
+
+
+                <!-- CERTIFICATE NAME -->
+
+                <div class="certificate-form-group">
+
+                    <label for="certificate_name">
+                        Certificate Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="certificate_name"
+                        name="certificate_name"
+                        placeholder="Example: Python for Everybody"
+                        maxlength="200"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PROVIDER -->
+
+                <div class="certificate-form-group">
+
+                    <label for="provider">
+                        Provider
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="provider"
+                        name="provider"
+                        placeholder="Example: Coursera"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="certificate-form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+
+                    <select
+                        name="category"
+                        id="category"
+                    >
+
+                        <option value="Programming">
+                            Programming
+                        </option>
+
+                        <option value="Web Development">
+                            Web Development
+                        </option>
+
+                        <option value="Data / AI">
+                            Data / AI
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="certificate-add-btn"
+                >
+
+                    Add Certificate →
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CERTIFICATE LIST
+        ================================================= -->
+
+        <section class="dashboard-card">
+
+
+            <div class="certificate-list-header">
+
+                <div>
+
+                    <h2>
+                        🏆 My Certificates
+                    </h2>
+
+                    <p>
+                        Your professional learning achievements
+                    </p>
+
+                </div>
+
+
+                <div class="certificate-search">
+
+                    <span>
+                        🔎
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="certificateSearch"
+                        placeholder="Search certificates..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            {% if certificates %}
+
+
+            <div
+                class="certificate-grid"
+                id="certificateGrid"
+            >
+
+
+                {% for certificate in certificates %}
+
+
+                <div
+                    class="certificate-card"
+                    data-search="{{ certificate['name'] }} {{ certificate['provider'] }} {{ certificate['category'] }}"
+                >
+
+
+                    <!-- CARD TOP -->
+
+                    <div class="certificate-card-top">
+
+
+                        <div class="certificate-trophy">
+                            🏆
+                        </div>
+
+
+                        <div class="certificate-actions">
+
+
+                            <!-- EDIT -->
+
+                            <button
+                                type="button"
+                                onclick='editCertificate(
+                                    {{ certificate["id"]|tojson }},
+                                    {{ certificate["name"]|tojson }},
+                                    {{ certificate["provider"]|tojson }},
+                                    {{ certificate["category"]|tojson }}
+                                )'
+                                aria-label="Edit {{ certificate['name'] }}"
+                                title="Edit certificate"
+                            >
+
+                                ✏️
+
+                            </button>
+
+
+
+                            <!-- DELETE -->
+
+                            <a
+                                href="{{ url_for('delete_certificate', id=certificate['id']) }}"
+                                onclick="return confirm('Delete this certificate?')"
+                                aria-label="Delete {{ certificate['name'] }}"
+                                title="Delete certificate"
+                            >
+
+                                🗑️
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CARD BODY -->
+
+                    <div class="certificate-card-body">
+
+
+                        <span class="certificate-category">
+
+                            {{ certificate["category"] }}
+
+                        </span>
+
+
+                        <h3>
+
+                            {{ certificate["name"] }}
+
+                        </h3>
+
+
+                        <p>
+
+                            Issued by
+
+                            <strong>
+                                {{ certificate["provider"] }}
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- CARD FOOTER -->
+
+                    <div class="certificate-card-footer">
+
+                        <span>
+                            ✓ Added to CareerPortal
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================= -->
+
+            <div class="empty-certificates">
+
+                <div>
+                    🏆
+                </div>
+
+
+                <h3>
+                    No certificates yet
+                </h3>
+
+
+                <p>
+                    Add your first certificate above
+                    to showcase your achievements.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 CareerPortal • Student Placement Management System
+            </p>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     EDIT CERTIFICATE MODAL
+===================================================== -->
+
+<div
+    id="editCertificateModal"
+    class="skill-modal"
+>
+
+
+    <div class="skill-modal-box">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="skill-modal-header">
+
+            <div>
+
+                <h2>
+                    Edit Certificate
+                </h2>
+
+                <p>
+                    Update your certification details
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeEditCertificate()"
+                aria-label="Close"
+            >
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- EDIT FORM -->
+
+        <form
+            id="editCertificateForm"
+            method="POST"
+        >
+
+
+            <!-- CERTIFICATE NAME -->
+
+            <div class="skill-form-group">
+
+                <label for="editCertificateName">
+                    Certificate Name
+                </label>
+
+
+                <input
+                    type="text"
+                    name="certificate_name"
+                    id="editCertificateName"
+                    maxlength="200"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PROVIDER -->
+
+            <div class="skill-form-group">
+
+                <label for="editCertificateProvider">
+                    Provider
+                </label>
+
+
+                <input
+                    type="text"
+                    name="provider"
+                    id="editCertificateProvider"
+                    maxlength="150"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div class="skill-form-group">
+
+                <label for="editCertificateCategory">
+                    Category
+                </label>
+
+
+                <select
+                    name="category"
+                    id="editCertificateCategory"
+                >
+
+                    <option value="Programming">
+                        Programming
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Data / AI">
+                        Data / AI
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MODAL BUTTONS -->
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closeEditCertificate()"
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-save"
+                >
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CERTIFICATE JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   SEARCH CERTIFICATES
+===================================================== */
+
+function searchCertificates() {
+
+    const searchInput =
+        document.getElementById(
+            "certificateSearch"
+        );
+
+
+    if (!searchInput) {
+        return;
+    }
+
+
+    const search =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".certificate-card"
+        );
+
+
+    cards.forEach(function(card) {
+
+        const text =
+            (
+                card.getAttribute(
+                    "data-search"
+                ) || ""
+            ).toLowerCase();
+
+
+        if (text.includes(search)) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+
+/* =====================================================
+   EDIT CERTIFICATE
+===================================================== */
+
+function editCertificate(
+    id,
+    name,
+    provider,
+    category
+) {
+
+    const modal =
+        document.getElementById(
+            "editCertificateModal"
+        );
+
+
+    const form =
+        document.getElementById(
+            "editCertificateForm"
+        );
+
+
+    if (!modal || !form) {
+        return;
+    }
+
+
+    form.action =
+        "{{ url_for('update_certificate', id=0) }}"
+        .replace(
+            "/0",
+            "/" + id
+        );
+
+
+    document.getElementById(
+        "editCertificateName"
+    ).value = name;
+
+
+    document.getElementById(
+        "editCertificateProvider"
+    ).value = provider;
+
+
+    document.getElementById(
+        "editCertificateCategory"
+    ).value = category;
+
+
+    modal.classList.add("show");
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeEditCertificate() {
+
+    const modal =
+        document.getElementById(
+            "editCertificateModal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove("show");
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   SEARCH EVENT
+===================================================== */
+
+const certificateSearch =
+    document.getElementById(
+        "certificateSearch"
+    );
+
+
+if (certificateSearch) {
+
+    certificateSearch.addEventListener(
+        "input",
+        searchCertificates
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE WHEN CLICKING OUTSIDE
+===================================================== */
+
+const editCertificateModal =
+    document.getElementById(
+        "editCertificateModal"
+    );
+
+
+if (editCertificateModal) {
+
+    editCertificateModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+
+                closeEditCertificate();
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE WITH ESCAPE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeEditCertificate();
+
+        }
+
+    }
+);
+
+</script>
+
+
+
+<!-- =====================================================
+     GLOBAL JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+
+</body>
+
+</html>

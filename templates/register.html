@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPortal | Create Account</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="auth-page">
+
+
+<div class="auth-container">
+
+
+    <!-- =================================================
+         LEFT SIDE
+    ================================================= -->
+
+    <div class="auth-left">
+
+        <div class="auth-brand">
+
+            <div class="auth-logo"><img src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}" alt="CareerPortal"></div>
+
+            <div>
+
+                <h2>CareerPortal</h2>
+
+                <p>Student Placement Portal</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-content">
+
+            <span class="auth-small-title">
+                STUDENT PLACEMENT SYSTEM
+            </span>
+
+            <h1>
+                Start your career<br>
+                journey today.
+            </h1>
+
+            <p>
+                Create your student account and
+                manage your placement preparation,
+                skills, DSA progress, certificates
+                and internship applications.
+            </p>
+
+
+            <div class="auth-features">
+
+                <div>
+
+                    <span>👤</span>
+
+                    <p>
+                        Personal student profile
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <span>💻</span>
+
+                    <p>
+                        Track your technical skills
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <span>🧠</span>
+
+                    <p>
+                        Monitor your DSA journey
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <span>🚀</span>
+
+                    <p>
+                        Prepare for placements
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RIGHT SIDE
+    ================================================= -->
+
+    <div class="auth-right">
+
+        <div class="login-card register-card">
+
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    🎓
+                </div>
+
+                <h1>
+                    Create Account
+                </h1>
+
+                <p>
+                    Register as a student to get started.
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="auth-error">
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 REGISTER FORM
+            ================================================= -->
+
+            <form
+                method="POST"
+                action="/register"
+                class="auth-form"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span>👤</span>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REGISTRATION NUMBER -->
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Registration Number
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span>🆔</span>
+
+                        <input
+                            type="text"
+                            name="registration_no"
+                            placeholder="Example: RA00002"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span>📧</span>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DEPARTMENT + YEAR -->
+
+                <div class="register-two-column">
+
+
+                    <div class="auth-form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>🎓</span>
+
+                            <select
+                                name="department"
+                                required
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="CSE">
+                                    CSE
+                                </option>
+
+                                <option value="ECE">
+                                    ECE
+                                </option>
+
+                                <option value="EEE">
+                                    EEE
+                                </option>
+
+                                <option value="MECH">
+                                    Mechanical
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="auth-form-group">
+
+                        <label>
+                            Year
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>📅</span>
+
+                            <select
+                                name="year"
+                                required
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="1">
+                                    1st Year
+                                </option>
+
+                                <option value="2">
+                                    2nd Year
+                                </option>
+
+                                <option value="3">
+                                    3rd Year
+                                </option>
+
+                                <option value="4">
+                                    4th Year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span>🔒</span>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+
+                    Create Account
+
+                    <span>→</span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="auth-divider">
+
+                <span>Already have an account?</span>
+
+            </div>
+
+
+            <a
+                href="/login"
+                class="create-account"
+            >
+
+                ← Back to Login
+
+            </a>
+
+
+            <p class="login-footer">
+
+                © 2026 CareerPortal
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

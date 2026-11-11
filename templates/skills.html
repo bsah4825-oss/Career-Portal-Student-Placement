@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerPortal | Skills</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body class="skills-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+
+            <img
+                src="{{ url_for('static', filename='images/careerportal-logo-icon.png') }}"
+                alt="CareerPortal"
+            >
+
+        </div>
+
+        <div>
+
+            <h1>CareerPortal</h1>
+
+            <p>Student Placement</p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="{{ url_for('home') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⌂</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('profile') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◉</span>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('skills_page') }}"
+            class="nav-item active"
+        >
+
+            <span class="nav-icon">◆</span>
+
+            <span>Skills</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('dsa_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">▣</span>
+
+            <span>DSA Tracker</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('certificates_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">◇</span>
+
+            <span>Certificates</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('internships_page') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">▰</span>
+
+            <span>Internships</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="{{ url_for('settings') }}"
+            class="nav-item"
+        >
+
+            <span class="nav-icon">⚙</span>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-item logout"
+        >
+
+            <span class="nav-icon">⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOP HEADER
+    ================================================= -->
+
+    <header class="top-header">
+
+        <div>
+
+            <h2>
+                Skills
+            </h2>
+
+            <p>
+                Build and track your technical skills
+            </p>
+
+        </div>
+
+
+        <div class="header-profile">
+
+            <div class="profile-avatar">
+
+                {{ user["name"][0].upper() }}
+
+            </div>
+
+
+            <div class="header-profile-info">
+
+                <strong>
+                    {{ user["name"] }}
+                </strong>
+
+                <span>
+                    {{ user["registration_no"] }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="page-content">
+
+
+        <!-- =================================================
+             HERO SECTION
+        ================================================= -->
+
+        <section class="skills-hero">
+
+            <div>
+
+                <span class="skills-label">
+                    SKILL DEVELOPMENT
+                </span>
+
+
+                <h1>
+                    Your Skills,
+                    Your Growth 🚀
+                </h1>
+
+
+                <p>
+                    Track your technical abilities
+                    and prepare yourself for placement.
+                </p>
+
+            </div>
+
+
+            <div class="skills-average">
+
+                <strong>
+                    {{ average_progress }}%
+                </strong>
+
+                <span>
+                    Average Skill
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SKILL STATISTICS
+        ================================================= -->
+
+        <div class="skills-stats">
+
+
+            <!-- TOTAL -->
+
+            <div class="skill-stat-card">
+
+                <div class="skill-stat-icon">
+                    💻
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Total Skills
+                    </span>
+
+                    <strong>
+                        {{ skills|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROGRAMMING -->
+
+            <div class="skill-stat-card">
+
+                <div class="skill-stat-icon purple">
+                    👨‍💻
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Programming
+                    </span>
+
+                    <strong>
+                        {{ programming_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WEB DEVELOPMENT -->
+
+            <div class="skill-stat-card">
+
+                <div class="skill-stat-icon blue">
+                    🌐
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Web Development
+                    </span>
+
+                    <strong>
+                        {{ web_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DATABASE -->
+
+            <div class="skill-stat-card">
+
+                <div class="skill-stat-icon green">
+                    🗄️
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Database
+                    </span>
+
+                    <strong>
+                        {{ database_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADD NEW SKILL
+        ================================================= -->
+
+        <section class="dashboard-card add-skill-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        ➕ Add New Skill
+                    </h2>
+
+                    <p>
+                        Add a skill and set your current level.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form
+                action="{{ url_for('add_skill') }}"
+                method="POST"
+                class="skill-form"
+            >
+
+
+                <!-- SKILL NAME -->
+
+                <div class="skill-form-group">
+
+                    <label for="skill">
+                        Skill Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="skill"
+                        name="skill"
+                        placeholder="Example: Python"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="skill-form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="Programming">
+                            Programming
+                        </option>
+
+                        <option value="Web Development">
+                            Web Development
+                        </option>
+
+                        <option value="Database">
+                            Database
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PROGRESS -->
+
+                <div class="skill-form-group">
+
+                    <label for="skillProgress">
+
+                        Progress:
+
+                        <span id="progressValue">
+                            50
+                        </span>%
+
+                    </label>
+
+
+                    <input
+                        type="range"
+                        name="progress"
+                        id="skillProgress"
+                        min="0"
+                        max="100"
+                        value="50"
+                        oninput="updateProgress(this.value)"
+                    >
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="add-skill-btn"
+                >
+
+                    Add Skill →
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MY SKILLS
+        ================================================= -->
+
+        <section class="dashboard-card skill-list-card">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        💻 My Skills
+                    </h2>
+
+                    <p>
+                        Your current technical skill set
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            {% if skills %}
+
+
+            <div class="skills-list">
+
+
+                {% for skill in skills %}
+
+
+                <div class="skill-row">
+
+
+                    <!-- SKILL INFORMATION -->
+
+                    <div class="skill-main">
+
+
+                        <div class="skill-symbol">
+
+
+                            {% if skill["category"] == "Programming" %}
+
+                                💻
+
+                            {% elif skill["category"] == "Web Development" %}
+
+                                🌐
+
+                            {% elif skill["category"] == "Database" %}
+
+                                🗄️
+
+                            {% else %}
+
+                                ⭐
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        <div class="skill-name-area">
+
+
+                            <div class="skill-name-line">
+
+                                <strong>
+                                    {{ skill["name"] }}
+                                </strong>
+
+
+                                <span>
+                                    {{ skill["category"] }}
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="skill-progress-track">
+
+                                <div
+                                    class="skill-progress-fill"
+                                    style="width: {{ skill['progress'] }}%;"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PERCENTAGE -->
+
+                    <div class="skill-percentage">
+
+                        {{ skill["progress"] }}%
+
+                    </div>
+
+
+
+                    <!-- EDIT -->
+
+                    <button
+                        type="button"
+                        class="skill-edit-btn"
+                        onclick='openEditSkill(
+                            {{ skill["id"]|tojson }},
+                            {{ skill["name"]|tojson }},
+                            {{ skill["category"]|tojson }},
+                            {{ skill["progress"]|tojson }}
+                        )'
+                        aria-label="Edit {{ skill['name'] }}"
+                        title="Edit skill"
+                    >
+
+                        ✏️
+
+                    </button>
+
+
+
+                    <!-- DELETE -->
+
+                    <a
+                        href="{{ url_for('delete_skill', id=skill['id']) }}"
+                        class="skill-delete-btn"
+                        onclick="return confirm('Delete this skill?')"
+                        aria-label="Delete {{ skill['name'] }}"
+                        title="Delete skill"
+                    >
+
+                        🗑️
+
+                    </a>
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================= -->
+
+            <div class="empty-skills">
+
+                <div>
+                    💻
+                </div>
+
+
+                <h3>
+                    No skills added yet
+                </h3>
+
+
+                <p>
+                    Add your first skill above to start
+                    tracking your progress.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================= -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 CareerPortal • Student Placement Management System
+            </p>
+
+        </footer>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     EDIT SKILL MODAL
+===================================================== -->
+
+<div
+    id="editSkillModal"
+    class="skill-modal"
+>
+
+
+    <div class="skill-modal-box">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="skill-modal-header">
+
+
+            <div>
+
+                <h2>
+                    Edit Skill
+                </h2>
+
+                <p>
+                    Update your skill information
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeEditSkill()"
+                aria-label="Close"
+            >
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- EDIT FORM -->
+
+        <form
+            id="editSkillForm"
+            method="POST"
+        >
+
+
+            <!-- SKILL NAME -->
+
+            <div class="skill-form-group">
+
+                <label for="editSkillName">
+                    Skill Name
+                </label>
+
+
+                <input
+                    type="text"
+                    name="skill"
+                    id="editSkillName"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div class="skill-form-group">
+
+                <label for="editSkillCategory">
+                    Category
+                </label>
+
+
+                <select
+                    name="category"
+                    id="editSkillCategory"
+                    required
+                >
+
+                    <option value="Programming">
+                        Programming
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Database">
+                        Database
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="skill-form-group">
+
+                <label for="editSkillProgress">
+
+                    Progress:
+
+                    <span id="editProgressValue">
+                        50
+                    </span>%
+
+                </label>
+
+
+                <input
+                    type="range"
+                    name="progress"
+                    id="editSkillProgress"
+                    min="0"
+                    max="100"
+                    value="50"
+                    oninput="updateEditProgress(this.value)"
+                >
+
+            </div>
+
+
+
+            <!-- MODAL BUTTONS -->
+
+            <div class="modal-buttons">
+
+
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closeEditSkill()"
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-save"
+                >
+
+                    Save Changes
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ADD SKILL PROGRESS
+===================================================== */
+
+function updateProgress(value) {
+
+    const progressValue =
+        document.getElementById("progressValue");
+
+    if (progressValue) {
+
+        progressValue.textContent = value;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   EDIT SKILL PROGRESS
+===================================================== */
+
+function updateEditProgress(value) {
+
+    const progressValue =
+        document.getElementById("editProgressValue");
+
+    if (progressValue) {
+
+        progressValue.textContent = value;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   OPEN EDIT MODAL
+===================================================== */
+
+function openEditSkill(
+    id,
+    name,
+    category,
+    progress
+) {
+
+    const modal =
+        document.getElementById("editSkillModal");
+
+    const form =
+        document.getElementById("editSkillForm");
+
+
+    if (!modal || !form) {
+        return;
+    }
+
+
+    form.action =
+        "{{ url_for('update_skill', id=0) }}".replace(
+            "/0",
+            "/" + id
+        );
+
+
+    document.getElementById(
+        "editSkillName"
+    ).value = name;
+
+
+    document.getElementById(
+        "editSkillCategory"
+    ).value = category;
+
+
+    document.getElementById(
+        "editSkillProgress"
+    ).value = progress;
+
+
+    document.getElementById(
+        "editProgressValue"
+    ).textContent = progress;
+
+
+    modal.classList.add("show");
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE EDIT MODAL
+===================================================== */
+
+function closeEditSkill() {
+
+    const modal =
+        document.getElementById("editSkillModal");
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove("show");
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE WHEN CLICKING OUTSIDE
+===================================================== */
+
+const editSkillModal =
+    document.getElementById("editSkillModal");
+
+
+if (editSkillModal) {
+
+    editSkillModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === this) {
+
+                closeEditSkill();
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE WITH ESCAPE KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeEditSkill();
+
+        }
+
+    }
+);
+
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+
+</body>
+
+</html>

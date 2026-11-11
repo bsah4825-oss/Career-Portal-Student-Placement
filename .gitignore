@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.log
+# Do not publish student records or local SQLite data to GitHub.
+database.db
+database.db-shm
+database.db-wal
